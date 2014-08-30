@@ -1,0 +1,6 @@
+.git
+.tmp
+app
+bower_components
+node_modules
+test
