@@ -28,26 +28,6 @@ RUN git clone "https://github.com/mohi-io/mohi-io-www.git" \
 	&& npm install bower -g && bower install --allow-root \
   && grunt build
 
-ADD build /usr/local/nginx/html/build
-
-#RUN ls /usr/local/nginx/html
-RUN ls "mohi-io-www"
-RUN pwd
-RUN ls
-RUN ls "build"
-RUN cp -Rp "mohi-io-www/dist/" "build/dist/"
-RUN ls "build"
-RUN ls "build/dist"
-
-RUN sh -c "curl https://get.docker.io/gpg | apt-key add -" \
-    && sh -c "echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list" \
-    && apt-get update \
-    && apt-get install lxc-docker -y
-
-RUN cd build && docker build -t mohi-io-www-img .
-#RUN mv "mohi-io-www/dist" "/usr/local/nginx/html"
-#RUN ls /usr/local/nginx/html
-
 ADD nginx.conf /etc/nginx.conf
 
 # clean up
