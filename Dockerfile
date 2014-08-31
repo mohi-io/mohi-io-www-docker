@@ -24,8 +24,8 @@ RUN curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x
 RUN git clone "https://github.com/mohi-io/mohi-io-www.git" \
 	&& cd "mohi-io-www"  \
 	&& npm install \
-	&& npm install grunt-cli -g \
-	&& npm install bower -g && bower install --allow-root \
+	&& npm install -g bower grunt-cli \
+	&& bower install --allow-root \
   && grunt build
 
 
@@ -40,7 +40,8 @@ RUN apt-get clean \
 		ca-certificates \
     git \
     curl \
-    && rm -rf mohi-io-www
+    && rm -rf mohi-io-www \
+    && rm -rf /usr/local/lib/node_modules
 
 # docker build --rm=true -t mohi-io-www .
 # docker run --name mohi-io-www-nginx -d -p 8080:80 mohi-io-www
