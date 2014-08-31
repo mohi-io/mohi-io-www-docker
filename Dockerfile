@@ -28,16 +28,19 @@ RUN git clone "https://github.com/mohi-io/mohi-io-www.git" \
 	&& npm install bower -g && bower install --allow-root \
   && grunt build
 
+
+RUN cp -Rp "mohi-io-www/dist" "/var/www"
+
 ADD nginx.conf /etc/nginx.conf
 
 # clean up
-RUN apt-get purge -y \
+RUN apt-get clean \
+		&& apt-get autoclean -y \
+		&& apt-get autoremove -y \
 		ca-certificates \
-		git \
-		curl \
-		&& apt-get clean \
-		&& apt-get autoremove -y
-#		&& rm -rf mohi-io-www
+    git \
+    curl \
+    && rm -rf mohi-io-www
 
 # docker build --rm=true -t mohi-io-www .
 # docker run --name mohi-io-www-nginx -d -p 8080:80 mohi-io-www
