@@ -1,6 +1,9 @@
+# zenedith / mohi-io-www-docker
+#
+# VERSION               0.2.0
+
 FROM nginx
 
-ENV NGINX_VERSION 1.7.4
 ENV NODE_VERSION 0.10.31
 
 RUN apt-get update && apt-get install -y \
